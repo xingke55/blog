@@ -5,7 +5,7 @@ import 'normalize.css'
 import './assets/css/index.scss'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import '../mock'
+// import '../mock'
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(router)

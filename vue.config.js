@@ -6,8 +6,10 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 module.exports = defineConfig({
   // 1.配置方式一: CLI提供的属性
   outputDir: './build',
+
   // publicPath: './',
   devServer: {
+    port: 3000,
     proxy: {
       '^/api': {
         target: 'http://192.168.1.188:3000',
@@ -27,6 +29,7 @@ module.exports = defineConfig({
     },
     plugins: [
       AutoImport({
+        imports: ['vue', 'vue-router', 'pinia'],
         resolvers: [ElementPlusResolver()]
       }),
       Components({

@@ -1,4 +1,7 @@
-// import axios from 'axios'
+import axios from 'axios'
+import type { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
+
+axios.defaults.withCredentials = true
 // import type { AxiosInstance } from 'axios'
 // import type { HYRequestInterceptors, HYRequestConfig } from './type'
 
@@ -124,4 +127,44 @@
 //   }
 // }
 
-// export default HYRequest
+class HYRequest {
+  instance: AxiosInstance
+  baseConfig: AxiosRequestConfig
+  constructor(config: AxiosRequestConfig) {
+    this.baseConfig = config
+    this.instance = axios.create(config)
+    this.instance.interceptors.request.use(
+      (config) => {
+        return config
+      },
+      (err) => {
+        return err
+      }
+    )
+    this.instance.interceptors.response.use(
+      (res) => {
+        return res
+      },
+      (err) => {
+        return err
+      }
+    )
+  }
+
+  request(config: AxiosRequestConfig) {
+    return new Promise((resolve, reject) => {
+      const allconfig = { ...this.baseConfig, ...config }
+      this.instance
+        .request(allconfig)
+        .then((res) => {
+          resolve(res)
+        })
+        .catch((e) => {
+          reject(e)
+          return e
+        })
+    })
+  }
+}
+
+export default HYRequest
