@@ -58,8 +58,8 @@ const checkUsername = (rule: any, value: any, callback: any) => {
   callback()
 }
 const checkPassword = (rule: any, value: any, callback: any) => {
-  if (value.length <= 6) {
-    return callback('密码长度不能低于6个字符')
+  if (value.length <= 3) {
+    return callback('密码长度不能低于3个字符')
   }
   callback()
 }
